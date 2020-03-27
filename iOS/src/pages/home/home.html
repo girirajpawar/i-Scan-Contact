@@ -1,0 +1,113 @@
+<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+  <div class="flb">
+    <div class="splash-text">Welcome <br>to<br><span class="sim">¡</span>Scan Contact</div>
+    <div class="Aligner-item Aligner-item--top"></div>
+      <img src="assets/logo.svg">
+    <div class="Aligner-item Aligner-item--bottom"></div>
+  </div>
+</div>
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <img class="logo" src="assets/logo.svg"><span>&nbsp;&nbsp;i</span>
+      <div class="title-text">Scan Contact</div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content>
+  <ion-row *ngIf="!myImage">
+    <ion-col col-12>
+      <div>
+        <h1 class="welcomeLine">
+          Welcome to iScanContact!
+        </h1>
+        <p class="tipsInfo">Please click on <ion-icon name="camera"></ion-icon> or <ion-icon name="photos"></ion-icon> button to capture or select an existing image.</p>
+        <ul class="instruction">
+          <li>Either you can choose image from Photo Gallery or you can capture it from camera</li>
+          <li>Make sure you are selecting clear image to process</li>
+          <li>Using flash and autofoucs will help to read more accurate information</li>
+          <li>Crop the exact area of text while selection to be more accurate</li>
+        </ul>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!myImage" class="home-screen-buttons">
+    <ion-col col-6>
+      <button ion-button full (click)="captureImage()"><ion-icon name="camera"></ion-icon>&nbsp; Camera</button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button full (click)="chooseFromGallery()"><ion-icon name="photos"></ion-icon>&nbsp; Gallery</button>
+    </ion-col>
+  </ion-row>
+  
+  <div class="imageProcessingArea">
+    <angular-cropper #angularCropper (touchstart)="cropperTouchStart($event)" [cropperOptions]="cropperOptions" [imageUrl]="myImage" *ngIf="myImage"></angular-cropper>
+  </div>
+
+  <ion-row *ngIf="myImage" class="cropper-toolbar">
+    <ion-col col-4>
+      <button ion-button full  icon-left color="primary" (click)="zoom(true)">
+        <ion-icon name="add"></ion-icon> Zoom
+      </button>
+    </ion-col>
+    <ion-col col-4>
+      <button ion-button full  icon-left color="primary" (click)="zoom(false)">
+        <ion-icon name="remove"></ion-icon> Zoom
+      </button>
+    </ion-col>
+    <ion-col col-4>
+      <button ion-button full  icon-left (click)="rotate()">
+        <ion-icon name="refresh"></ion-icon> 90 deg
+      </button>
+    </ion-col>
+ 
+    <ion-col col-2>
+      <button ion-button full clear (click)="scaleX()">
+        Flip X
+      </button>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button full clear (click)="scaleY()">
+        Flip Y
+      </button>
+    </ion-col>
+ 
+    <ion-col col-2>
+      <button ion-button clear icon-only (click)="move(0, -10)">
+        <ion-icon name="arrow-round-up"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button clear icon-only (click)="move(0, 10)">
+        <ion-icon name="arrow-round-down"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button clear icon-only (click)="move(-10, 0)">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button clear icon-only (click)="move(10, 0)">
+        <ion-icon name="arrow-round-forward"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-6>
+      <!--<button ion-button color="danger" (click)="reset()">Reset</button>-->
+      <button ion-button color="danger" full (click)="clear()">Clear</button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button full (click)="homescreen()">Back</button> 
+    </ion-col>
+    <ion-col col-12>
+      <button ion-button full (click)="save()">Analyse</button> 
+    </ion-col>
+  </ion-row>
+  
+  <div *ngIf="!myImage" class="item--inner builder-item--footer_copyright" data-section="footer_copyright" data-item-id="footer_copyright">
+    <div class="component-wrap">
+    <p>Copyright © 2019 - <a href="https://cerebion.com" rel="nofollow">Cerebion</a> | <a href="https://cerebion.com/?page_id=3" rel="nofollow">Privacy-Policy</a></p></div>
+  </div>  
+</ion-content>

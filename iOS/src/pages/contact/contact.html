@@ -1,0 +1,35 @@
+<ion-content>
+  <ion-card *ngIf="croppedImage">
+    <ion-card-header><img [src]="croppedImage"></ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="saveContact()">
+        <ion-item>
+          <ion-label>First Name</ion-label>
+          <ion-input type="text" [(ngModel)]="contact.first" name="first"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Last Name</ion-label>
+          <ion-input type="text" [(ngModel)]="contact.last" name="last"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Phone#1</ion-label>
+          <ion-input type="text" [(ngModel)]="contact.phone1" name="phone1"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Phone#2</ion-label>
+          <ion-input type="text" [(ngModel)]="contact.phone2" name="phone2"></ion-input>
+        </ion-item>        
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="contact.email" name="email"></ion-input>
+        </ion-item>
+        <!--<ion-item>
+          <ion-label>Address</ion-label>
+          <ion-textarea [(ngModel)]="contact.address" name="address"></ion-textarea>
+        </ion-item>-->
+        <button ion-button type="submit" block (click)="addContact()">Add To Contact List</button>
+        <button ion-button type="button" color="danger" block (click)="goBack()">Back</button>
+      </form>      
+    </ion-card-content>
+  </ion-card>
+</ion-content>
